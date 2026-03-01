@@ -194,10 +194,26 @@ const FAQS = [
 
 export default function App() {
   const [activeTab, setActiveTab] = useState("home");
-
+  const [menuOpen, setMenuOpen] = useState(false);
   return (
     <div className="brent-navigator">
-      <nav className="sidebar">
+      {/* Hamburger button — only shows on mobile */}
+      <button
+        className="hamburger"
+        onClick={() => setMenuOpen(!menuOpen)}
+        aria-label="Toggle menu"
+      >
+        <span />
+        <span />
+        <span />
+      </button>
+
+      {/* Overlay — closes menu when tapping outside */}
+      {menuOpen && (
+        <div className="nav-overlay" onClick={() => setMenuOpen(false)} />
+      )}
+
+      <nav className={`sidebar ${menuOpen ? "open" : ""}`}>
         <div className="sidebar-brand">
           <div className="logo">BN</div>
           <span>Brent Navigator</span>
@@ -205,62 +221,91 @@ export default function App() {
         <div className="nav-group">
           <button
             className={`nav-item ${activeTab === "home" ? "active" : ""}`}
-            onClick={() => setActiveTab("home")}
+            onClick={() => {
+              setActiveTab("home");
+              setMenuOpen(false);
+            }}
           >
             <Home size={20} /> <span>Dashboard</span>
           </button>
           <button
             className={`nav-item ${activeTab === "crisis" ? "active" : ""}`}
-            onClick={() => setActiveTab("crisis")}
+            onClick={() => {
+              setActiveTab("crisis");
+              setMenuOpen(false);
+            }}
           >
             <AlertCircle size={20} /> <span>Crisis Support</span>
           </button>
           <button
             className={`nav-item ${activeTab === "health" ? "active" : ""}`}
-            onClick={() => setActiveTab("health")}
+            onClick={() => {
+              setActiveTab("health");
+              setMenuOpen(false);
+            }}
           >
             <Heart size={20} /> <span>Health</span>
           </button>
-
           <button
             className={`nav-item ${activeTab === "environment" ? "active" : ""}`}
-            onClick={() => setActiveTab("environment")}
+            onClick={() => {
+              setActiveTab("environment");
+              setMenuOpen(false);
+            }}
           >
             <Trash2 size={20} /> <span>Cleaner Brent</span>
           </button>
           <button
             className={`nav-item ${activeTab === "hub" ? "active" : ""}`}
-            onClick={() => setActiveTab("hub")}
+            onClick={() => {
+              setActiveTab("hub");
+              setMenuOpen(false);
+            }}
           >
             <Building2 size={20} /> <span>The Hub</span>
           </button>
           <button
             className={`nav-item ${activeTab === "jobs" ? "active" : ""}`}
-            onClick={() => setActiveTab("jobs")}
+            onClick={() => {
+              setActiveTab("jobs");
+              setMenuOpen(false);
+            }}
           >
             <Briefcase size={20} /> <span>Employment</span>
           </button>
           <button
             className={`nav-item ${activeTab === "housing" ? "active" : ""}`}
-            onClick={() => setActiveTab("housing")}
+            onClick={() => {
+              setActiveTab("housing");
+              setMenuOpen(false);
+            }}
           >
-            <Home size={20} /> <span>Housing Ads</span>
+            <Home size={20} /> <span>Housing</span>
           </button>
           <button
             className={`nav-item ${activeTab === "youth" ? "active" : ""}`}
-            onClick={() => setActiveTab("youth")}
+            onClick={() => {
+              setActiveTab("youth");
+              setMenuOpen(false);
+            }}
           >
             <Users size={20} /> <span>Youth & Rights</span>
           </button>
           <button
             className={`nav-item ${activeTab === "budget" ? "active" : ""}`}
-            onClick={() => setActiveTab("budget")}
+            onClick={() => {
+              setActiveTab("budget");
+              setMenuOpen(false);
+            }}
           >
             <DollarSign size={20} /> <span>Tax & Budget</span>
           </button>
           <button
             className={`nav-item ${activeTab === "faq" ? "active" : ""}`}
-            onClick={() => setActiveTab("faq")}
+            onClick={() => {
+              setActiveTab("faq");
+              setMenuOpen(false);
+            }}
           >
             <Info size={20} /> <span>Council FAQs</span>
           </button>
@@ -4971,7 +5016,6 @@ function HealthView() {
     </motion.div>
   );
 }
-
 
 function FAQView() {
   const [search, setSearch] = useState("");

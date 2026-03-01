@@ -281,6 +281,84 @@ body {
   padding: 10px 12px 12px;
 }
 
+/* HAMBURGER BUTTON */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 10px;
+  position: fixed;
+  top: 16px;
+  left: 16px;
+  z-index: 1001;
+}
+.hamburger span {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background: var(--primary);
+  border-radius: 2px;
+  transition: 0.2s;
+}
+
+/* OVERLAY */
+.nav-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 999;
+}
+
+/* MOBILE */
+@media (max-width: 768px) {
+  .hamburger {
+    display: flex;
+  }
+  .nav-overlay {
+    display: block;
+  }
+  .sidebar {
+    position: fixed;
+    top: 0;
+    left: -280px;
+    height: 100vh;
+    width: 260px;
+    z-index: 1000;
+    transition: left 0.3s ease;
+    overflow-y: auto;
+  }
+  .sidebar.open {
+    left: 0;
+  }
+  .main-viewport {
+    width: 100%;
+  }
+  .viewport-header {
+    padding: 0 16px 0 56px;
+    height: 60px;
+  }
+  .view-wrapper {
+    padding: 0 16px;
+  }
+  .problem-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+  .scroll-content {
+    padding-bottom: 40px;
+  }
+}
+
+@media (max-width: 400px) {
+  .problem-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
 .footer-bottom a:hover {
   text-decoration: underline !important;
   opacity: 0.8;
