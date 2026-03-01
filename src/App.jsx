@@ -193,8 +193,17 @@ const FAQS = [
 ];
 
 export default function App() {
-  const [activeTab, setActiveTab] = useState("home");
+  const [activeTab, setActiveTab] = useState(
+    () => localStorage.getItem("brent-tab") || "home",
+  );
   const [menuOpen, setMenuOpen] = useState(false);
+  const scrollRef = useRef(null);
+
+  const navigate = (tab) => {
+    setActiveTab(tab);
+    localStorage.setItem("brent-tab", tab);
+    if (scrollRef.current) scrollRef.current.scrollTop = 0;
+  };
   return (
     <div className="brent-navigator">
       {/* Hamburger button — only shows on mobile */}
@@ -222,7 +231,7 @@ export default function App() {
           <button
             className={`nav-item ${activeTab === "home" ? "active" : ""}`}
             onClick={() => {
-              setActiveTab("home");
+              navigate("home");
               setMenuOpen(false);
             }}
           >
@@ -231,7 +240,7 @@ export default function App() {
           <button
             className={`nav-item ${activeTab === "crisis" ? "active" : ""}`}
             onClick={() => {
-              setActiveTab("crisis");
+              navigate("crisis");
               setMenuOpen(false);
             }}
           >
@@ -240,7 +249,7 @@ export default function App() {
           <button
             className={`nav-item ${activeTab === "health" ? "active" : ""}`}
             onClick={() => {
-              setActiveTab("health");
+              navigate("health");
               setMenuOpen(false);
             }}
           >
@@ -249,7 +258,7 @@ export default function App() {
           <button
             className={`nav-item ${activeTab === "environment" ? "active" : ""}`}
             onClick={() => {
-              setActiveTab("environment");
+              navigate("environment");
               setMenuOpen(false);
             }}
           >
@@ -258,7 +267,7 @@ export default function App() {
           <button
             className={`nav-item ${activeTab === "hub" ? "active" : ""}`}
             onClick={() => {
-              setActiveTab("hub");
+              navigate("hub");
               setMenuOpen(false);
             }}
           >
@@ -267,7 +276,7 @@ export default function App() {
           <button
             className={`nav-item ${activeTab === "jobs" ? "active" : ""}`}
             onClick={() => {
-              setActiveTab("jobs");
+              navigate("jobs");
               setMenuOpen(false);
             }}
           >
@@ -276,7 +285,7 @@ export default function App() {
           <button
             className={`nav-item ${activeTab === "housing" ? "active" : ""}`}
             onClick={() => {
-              setActiveTab("housing");
+              navigate("housing");
               setMenuOpen(false);
             }}
           >
@@ -285,7 +294,7 @@ export default function App() {
           <button
             className={`nav-item ${activeTab === "youth" ? "active" : ""}`}
             onClick={() => {
-              setActiveTab("youth");
+              navigate("youth");
               setMenuOpen(false);
             }}
           >
@@ -294,7 +303,7 @@ export default function App() {
           <button
             className={`nav-item ${activeTab === "budget" ? "active" : ""}`}
             onClick={() => {
-              setActiveTab("budget");
+              navigate("budget");
               setMenuOpen(false);
             }}
           >
@@ -303,7 +312,7 @@ export default function App() {
           <button
             className={`nav-item ${activeTab === "faq" ? "active" : ""}`}
             onClick={() => {
-              setActiveTab("faq");
+              navigate("faq");
               setMenuOpen(false);
             }}
           >
@@ -316,21 +325,16 @@ export default function App() {
         {/* PERSISTENT HEADER */}
         <header className="viewport-header">
           <div className="header-info">
-            <div className="breadcrumb">
-              Brent Borough / <span className="active-crumb">{activeTab}</span>
-            </div>
-            <h2 className="view-title">
-              {activeTab.charAt(0).toUpperCase() + activeTab.slice(1)}
-            </h2>
+            <h2 className="view-title">Brent Borough</h2>
           </div>
           <div className="header-actions">
             <div className="emergency-pill">
-              Facing an Emergency? <strong>Always Call 999</strong>
+              Emergency? <strong>Call 999</strong>
             </div>
           </div>
         </header>
 
-        <section className="scroll-content">
+        <section className="scroll-content" ref={scrollRef}>
           <div className="view-container">
             <AnimatePresence mode="wait">
               {activeTab === "home" && <HomeView key="home" />}

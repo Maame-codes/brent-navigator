@@ -9,6 +9,7 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  max-width: 100%;
 }
 body {
   font-family: "Outfit", sans-serif;
@@ -356,6 +357,36 @@ body {
 @media (max-width: 400px) {
   .problem-grid {
     grid-template-columns: 1fr;
+  }
+}
+
+/* PREVENT MOBILE LAYOUT SHIFT */
+html,
+body {
+  overflow-x: hidden;
+  width: 100%;
+  position: relative;
+}
+
+@media (max-width: 768px) {
+  .brent-navigator {
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+  .main-viewport {
+    min-height: 100vh;
+    width: 100vw;
+    overflow-x: hidden;
+  }
+  .view-container {
+    padding: 20px 16px;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  .view-wrapper {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 0;
   }
 }
 
