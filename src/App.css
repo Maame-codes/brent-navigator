@@ -77,6 +77,13 @@ body {
   justify-content: space-between;
   align-items: center;
 }
+
+.scroll-content {
+  -webkit-overflow-scrolling: touch;
+  scroll-behavior: smooth;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
 .emergency-contact {
   color: #ef4444;
   font-size: 0.85rem;
